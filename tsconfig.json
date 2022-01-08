@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "target": "es6",
+        "module": "ESNext",
+        "allowJs": true,
+        "noEmitOnError": false,
+        "noImplicitAny": true, // 不允许隐式的any类型
+        "noImplicitThis": true,
+        "alwaysStrict": false,
+        "strictNullChecks": true, // button?.addEventListener
+        "moduleResolution": "node",
+        "importHelpers": true,
+        // "lib": ["dom", "es5", "scripthost", "es2015"]
+        // "outDir": "./dist"
+    },
+    "include": ["**/*.ts"]
+}

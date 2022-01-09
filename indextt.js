@@ -1,4 +1,4 @@
-const { convertLinksAndSaveInSingleFile } = require('./src/convert')
+const { convertLinksAndSaveInSingleFile } = require('converter');
 const fs = require('hexo-fs');
 const path = require('path');
 const Eventproxy = require('eventproxy');

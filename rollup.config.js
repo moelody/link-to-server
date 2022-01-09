@@ -11,11 +11,11 @@ if you want to view the source visit the plugins github repository
 */
 `;
 
-let plugins = [typescript(), nodeResolve({ browser: true }), commonjs()];
+let plugins = [typescript(), nodeResolve(), commonjs()];
 // if (isProd) plugins.push(terser());
 
 export default {
-    input: 'src/hexo.ts',
+    input: 'src/converter.ts',
     output: {
         dir: '.',
         sourcemap: 'inline',
@@ -24,6 +24,5 @@ export default {
         exports: 'default',
         banner,
     },
-    external: ['obsidian'],
     plugins: plugins,
 };

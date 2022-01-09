@@ -1,19 +1,30 @@
+import { PathLike } from 'graceful-fs';
+import * as fs from 'hexo-fs';
+import * as path from 'path';
+
+
+
+type File = {
+    id: string,
+    path: string,
+    type: string,
+    params: { id: string },
+    source: PathLike
+}
 
 /* -------------------- CONVERTERS -------------------- */
 
 // --> Converts single file to provided final format and save back in the file
-export const convertLinksAndSaveInSingleFile = async (mdFile: TFile, finalFormat: 'markdown' | 'wiki') => {
-    let fileText = await plugin.app.vault.read(mdFile);
-    let newFileText =
-        finalFormat === 'markdown' ? await convertWikiLinksToMarkdown(fileText, mdFile) : await convertMarkdownLinksToWikiLinks(fileText, mdFile);
-    let fileStat = {};
-    await plugin.app.vault.modify(mdFile, newFileText, fileStat);
+export const convertLinksAndSaveInSingleFile = async (mdFile: File) => {
+    let fileText = fs.readFileSync(mdFile.source);
+    let newFileText = await convertWikiLinksToMarkdown(fileText, mdFile);
+    await fs.writeFile(<string>mdFile.source, newFileText);
 };
 
 /* -------------------- LINKS TO MARKDOWN CONVERTER -------------------- */
 
 // --> Converts links within given string from Wiki to MD
-export const convertWikiLinksToMarkdown = async (md: string, sourceFile: TFile): Promise<string> => {
+export const convertWikiLinksToMarkdown = async (md: string, sourceFile: File): Promise<string> => {
     let newMdText = md;
     let linkMatches: LinkMatch[] = await getAllLinkMatchesInFile(sourceFile);
     // --> Convert Wiki Internal Links to Markdown Link
@@ -25,11 +36,101 @@ export const convertWikiLinksToMarkdown = async (md: string, sourceFile: TFile):
     // --> Convert Wiki Transclusion Links to Markdown Transclusion
     let wikiTransclusions = linkMatches.filter((match) => match.type === 'wikiTransclusion');
     for (let wikiTransclusion of wikiTransclusions) {
-        let wikiTransclusionLink = createLink('mdTransclusion', wikiTransclusion.linkText, wikiTransclusion.altOrBlockRef, sourceFile, plugin);
+        let wikiTransclusionLink = createLink('mdTransclusion', wikiTransclusion.linkText, wikiTransclusion.altOrBlockRef, sourceFile);
         newMdText = newMdText.replace(wikiTransclusion.match, wikiTransclusionLink);
     }
     return newMdText;
 };
+
+/* -------------------- HELPERS -------------------- */
+
+const createLink = (dest: LinkType, originalLink: string, altOrBlockRef: string, sourceFile: File): string => {
+    let finalLink = originalLink;
+    let altText: string;
+
+    let fileLink = decodeURI(finalLink);
+    let file = { basename: path.basename(<string>sourceFile.source) };
+    finalLink = getRelativeLink(sourceFile.path, fileLink);
+
+    if (dest === 'wiki') {
+        // If alt text is same as the final link or same as file base name, it needs to be empty
+        if (altOrBlockRef !== '' && altOrBlockRef !== decodeURI(finalLink)) {
+            if (file && decodeURI(altOrBlockRef) === file.basename) {
+                altText = '';
+            } else {
+                altText = '|' + altOrBlockRef;
+            }
+        } else {
+            altText = '';
+        }
+        return `[[${decodeURI(finalLink)}${altText}]]`;
+    } else if (dest === 'markdown') {
+        // If there is no alt text specifiec and file exists, the alt text needs to be always the file base name
+        if (altOrBlockRef !== '') {
+            altText = altOrBlockRef;
+        } else {
+            altText = file ? file.basename : finalLink;
+        }
+        return `[${altText}](${encodeURI(finalLink)})`;
+    }
+};
+
+/**
+ *
+ * @param sourceFilePath Path of the file, in which the links are going to be used
+ * @param linkedFilePath File path, which will be referred in the source file
+ * @returns
+ */
+function getRelativeLink(sourceFilePath: string, linkedFilePath: string) {
+    function trim(arr: string[]) {
+        let start = 0;
+        for (; start < arr.length; start++) {
+            if (arr[start] !== '') break;
+        }
+
+        var end = arr.length - 1;
+        for (; end >= 0; end--) {
+            if (arr[end] !== '') break;
+        }
+
+        if (start > end) return [];
+        return arr.slice(start, end - start + 1);
+    }
+
+    var fromParts = trim(sourceFilePath.split('/'));
+    var toParts = trim(linkedFilePath.split('/'));
+
+    var length = Math.min(fromParts.length, toParts.length);
+    var samePartsLength = length;
+    for (var i = 0; i < length; i++) {
+        if (fromParts[i] !== toParts[i]) {
+            samePartsLength = i;
+            break;
+        }
+    }
+
+    var outputParts = [];
+    for (var i = samePartsLength; i < fromParts.length - 1; i++) {
+        outputParts.push('..');
+    }
+
+    outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+    return outputParts.join('/');
+}
+/* -------------------- LINK DETECTOR -------------------- */
+
+type FinalFormat = 'relative-path' | 'absolute-path' | 'shortest-path';
+type LinkType = 'markdown' | 'wiki' | 'wikiTransclusion' | 'mdTransclusion';
+
+interface LinkMatch {
+    type: LinkType;
+    match: string;
+    linkText: string;
+    altOrBlockRef: string;
+    sourceFilePath: string;
+}
+
 
 /* -------------------- TRANSCLUSIONS -------------------- */
 
@@ -87,9 +188,9 @@ interface LinkMatch {
 }
 
 
-const getAllLinkMatchesInFile = async (mdFile: TFile): Promise<LinkMatch[]> => {
+const getAllLinkMatchesInFile = async (mdFile: File): Promise<LinkMatch[]> => {
     const linkMatches: LinkMatch[] = [];
-    let fileText = await read(mdFile);
+    let fileText = fs.readFileSync(mdFile.source);
 
     // --> Get All WikiLinks
     let wikiRegex = /\[\[.*?\]\]/g;

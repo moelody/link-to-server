@@ -4,10 +4,14 @@ import * as path from 'path';
 
 type File = {
     id: string,
-    path: string,
+    path: string, // file path
     type: string,
-    params: { id: string },
-    source: PathLike
+    params: { 
+        '0': string,
+        '1': string,
+        id: string // filename
+    },
+    source: PathLike // fullPath
 }
 
 /* -------------------- CONVERTERS -------------------- */
@@ -47,7 +51,7 @@ const createLink = (dest: LinkType, originalLink: string, altOrBlockRef: string,
     let altText: string;
 
     let fileLink = decodeURI(finalLink);
-    let file = { basename: path.basename(<string>sourceFile.source) };
+    let file = { basename: sourceFile.id };
     finalLink = getRelativeLink(sourceFile.path, fileLink);
 
     if (dest === 'wiki') {

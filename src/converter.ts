@@ -2,8 +2,6 @@ import { PathLike } from 'graceful-fs';
 import * as fs from 'hexo-fs';
 import * as path from 'path';
 
-
-
 type File = {
     id: string,
     path: string,
@@ -72,6 +70,8 @@ const createLink = (dest: LinkType, originalLink: string, altOrBlockRef: string,
             altText = file ? file.basename : finalLink;
         }
         return `[${altText}](${encodeURI(finalLink)})`;
+    } else {
+        return '';
     }
 };
 

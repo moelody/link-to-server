@@ -8,13 +8,14 @@
         "allowJs": true,
         "noEmitOnError": false,
         "noImplicitAny": true, // 不允许隐式的any类型
+        "strict": true,
         // "noImplicitThis": true,
-        "alwaysStrict": false,
+        // "alwaysStrict": false,
         // "strictNullChecks": true, // button?.addEventListener
         "moduleResolution": "node",
         "importHelpers": true,
-        // "lib": ["dom", "es5", "scripthost", "es2015"]
-        // "outDir": "./dist"
+        "lib": ["dom", "es5", "scripthost", "es2015"],
+        "outDir": ""
     },
     "include": ["**/*.ts"]
 }

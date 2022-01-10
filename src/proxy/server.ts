@@ -1,5 +1,4 @@
-import * as express from "express";
-import { NextFunction, Request, Response } from "express";
+import { default as express } from "express";import { NextFunction, Request, Response } from "express";
 import { Plugin } from "obsidian";
 
 const getServer = (port: number) => {

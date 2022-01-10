@@ -21,9 +21,9 @@ let plugins = [
     nodeResolve({ browser: true, preferBuiltins: true }),
     commonjs(),
     json(),
-    copy({
-        targets: [{ src: "manifest.json", dest: "build" }]
-    })
+//     copy({
+//         targets: [{ src: "manifest.json", dest: "build" }]
+//     })
 ]
 if (isProd) plugins.push(terser())
 
@@ -37,5 +37,6 @@ export default {
         exports: "default",
         banner
     },
+    external: ["obsidian"],
     plugins: plugins
 }

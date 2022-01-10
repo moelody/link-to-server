@@ -210,6 +210,11 @@
     "@types/graceful-fs" "*"
     chokidar "^2.1.2"
 
+"@types/json-schema@^7.0.9":
+  version "7.0.9"
+  resolved "https://registry.npmmirror.com/@types/json-schema/download/@types/json-schema-7.0.9.tgz#97edc9037ea0c38585320b28964dde3b39e4660d"
+  integrity sha1-l+3JA36gw4WFMgsolk3eOznkZg0=
+
 "@types/mime@^1":
   version "1.3.2"
   resolved "https://registry.npmmirror.com/@types/mime/download/@types/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
@@ -950,10 +955,10 @@ function-bind@^1.1.1:
   resolved "https://registry.nlark.com/function-bind/download/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
 
-get-port@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmmirror.com/get-port/download/get-port-6.0.0.tgz?cache=0&sync_timestamp=1633308798228&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fget-port%2Fdownload%2Fget-port-6.0.0.tgz#eeac06c17b9d22c2949d4ce5abcc80753afe9be1"
-  integrity sha1-7qwGwXudIsKUnUzlq8yAdTr+m+E=
+get-port@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npmmirror.com/get-port/download/get-port-5.1.1.tgz?cache=0&sync_timestamp=1633308798228&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fget-port%2Fdownload%2Fget-port-5.1.1.tgz#0469ed07563479de6efb986baf053dcd7d4e3193"
+  integrity sha1-BGntB1Y0ed5u+5hrrwU9zX1OMZM=
 
 get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"

@@ -1,6 +1,6 @@
 import { PathLike } from 'graceful-fs';
 import * as fs from 'hexo-fs';
-import * as path from 'path';
+import LinkConverterPlugin from '../main';
 
 type File = {
     id: string,
@@ -51,7 +51,7 @@ const createLink = (dest: LinkType, originalLink: string, altOrBlockRef: string,
     let altText: string;
 
     let fileLink = decodeURI(finalLink);
-    let file = { basename: sourceFile.id };
+    let file = plugin.app.metadataCache.getFirstLinkpathDest(fileLink, sourceFile.path);
     finalLink = getRelativeLink(sourceFile.path, fileLink);
 
     if (dest === 'wiki') {

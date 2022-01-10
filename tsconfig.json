@@ -6,9 +6,9 @@
         "target": "es6",
         "module": "ESNext",
         "allowJs": true,
-        "noEmitOnError": false,
         "noImplicitAny": true, // 不允许隐式的any类型
         "strict": true,
+        "allowSyntheticDefaultImports": true,
         // "noImplicitThis": true,
         // "alwaysStrict": false,
         // "strictNullChecks": true, // button?.addEventListener
@@ -17,5 +17,5 @@
         "lib": ["dom", "es5", "scripthost", "es2015"],
         "outDir": ""
     },
-    "include": ["**/*.ts"]
+    "include": ["src/*.ts"]
 }

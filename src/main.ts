@@ -1,5 +1,5 @@
 import getPort from "get-port"
-import { debounce, Notice, Plugin, Setting } from "obsidian"
+import { debounce, Notice, Plugin, Setting, MetadataCache, App, Vault, Menu, TFile} from "obsidian"
 import getServer from "./proxy/server"
 
 // Remember to rename these classes and interfaces!
@@ -26,6 +26,8 @@ export default class LinkOB extends Plugin {
                 else console.error(err)
             })
         }
+        
+        console.log(this);
     }
 
     /**

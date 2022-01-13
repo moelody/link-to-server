@@ -1,5 +1,5 @@
 # Link Server Plugin
-该插件将会打开一个
+该插件将会打开一个端口3333的反向代理服务器用于从Obsidian API中获取Wiki链接的文件信息
 This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.
 
 ## How to use

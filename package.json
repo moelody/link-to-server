@@ -1,6 +1,6 @@
 {
     "name": "link-to-obsidian",
-    "version": "0.0.1",
+    "version": "1.0.1",
     "description": "This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.",
     "main": "index.js",
     "scripts": {

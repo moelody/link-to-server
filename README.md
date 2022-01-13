@@ -1,6 +1,47 @@
 # Link Server Plugin
 该插件将会打开一个端口3333的反向代理服务器用于从Obsidian API中获取Wiki链接的文件信息
+```
+// 该插件将会返回obsidian api的筛选结果 `plugin.app.metadataCache.getFirstLinkpathDest(<string>fileLink, <string>sourcePath);`
+// 通过使用 http://localhost:3333/?fileLink=<wiki原链接>&sourcePath=<md文件路径> 获取TFile类型的json数据
+type TFile = {
+    basename: string,
+    extension: string
+    name: string, 
+    parent: {
+        name: string,
+        path: string
+    },
+    path: string,
+    vault: {
+        adapter: {
+            basePath: string
+        }
+    },
+    content: string
+}
+```
+
 This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.
+```
+// this plugin will retrun `plugin.app.metadataCache.getFirstLinkpathDest(<string>fileLink, <string>sourcePath);` result
+// by using http://localhost:3333/?fileLink=<wikiLink>&sourcePath=<mdFilePath> to get json data based on below TFile
+type TFile = {
+    basename: string,
+    extension: string
+    name: string, 
+    parent: {
+        name: string,
+        path: string
+    },
+    path: string,
+    vault: {
+        adapter: {
+            basePath: string
+        }
+    },
+    content: string
+}
+```
 
 ## How to use
 

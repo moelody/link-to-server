@@ -15,7 +15,8 @@ type TFile = {
         adapter: {
             basePath: string
         }
-    }
+    },
+    content: string
 }
 
 const getServer = (port: number, plugin: LinkOB) => {

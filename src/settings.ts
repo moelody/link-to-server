@@ -58,7 +58,7 @@ export class LinkOBSettingsTab extends PluginSettingTab {
 
         const coffeeDiv = containerEl.createDiv("coffee")
         coffeeDiv.addClass("oz-coffee-div")
-        const coffeeLink = coffeeDiv.createEl("a", { href: "https://afdian.net/@moelody" })
+        const coffeeLink = coffeeDiv.createEl("a", { href: "https://www.patreon.com/moelody" })
         const coffeeImg = coffeeLink.createEl("img", {
             attr: {
                 src: "https://cdn.jsdelivr.net/gh/moelody/cdn@imgbot/blog/wechatpay.png"

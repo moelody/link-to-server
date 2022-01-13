@@ -1,103 +1,59 @@
-# hexo-easy-images
-![node](https://img.shields.io/badge/node-%3E%3D8.7.0-green.svg)
+# Link Server Plugin
+该插件将会打开一个
+This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.
 
-Hexo 博客插件，post 中随意引用本地图片、远程图片，插件将自动处理图片 copy 与 download及引用路径，本地预览与线上都能完美显示图片。
+## How to use
 
-### 安装
-```bash
-npm i hexo-easy-images -s
-```
+注意：该插件会打开一个默认端口3333的反向代理服务器，若该端口不可用，请到Link Server的设置页中修改端口
 
-### 自定义配置
+Note: This plugin will open a reverse proxy server at port 3333 by default. If the port is used, please go to the setting tab of Link Server to set another port
 
-以下配置非必需，在 `your-hexo-project/_config.yml` 添加。
+***
 
-```yml
-# Easy images
-easy_images:
-  init: false # 默认 false；改为 true，将处理过去所有 post，通常装插件后第一次运行时使用。
-  cdn_prefix: http://yourcdn.com # 默认 null; 图片前缀，在生成 html 文件时为 image 添加前缀
-  max_width: 800 # 默认 null；设置图片最大宽度
-  max_height: 800 # 默认 null；设置图片最大高度
-```
+1. 安装该插件 Install the plugin
+2. 在`第三方插件`中启用该插件 Enable the plugin in `Community Plugins`
+3. 开始使用插件 The plugin is ready to use
 
-### 介绍
-在书写 post 时，再也不用为插入图片问题担心了。只要你定义图片路径正确，无论是本地、在线、绝对路径、相对路径，统统不用担心。
+## Compatibility
 
-本插件自动将 post 中使用到图片，copy 到 source/images/your_post_id 文件夹下，并将 post文件内图片引用路径改为本地相对路径，保证本地 Markdown 编辑器正确显示。
+The required API feature is only available for Obsidian v0.12.2+.
 
-同时在生成 html 文件时，会将 html 中图片路径改为绝对路径。故，无论本地线上，图片都无需担心。
+## Installation
 
-例如：post 内容如下
+### From Obsidian
 
-```md
----
-title: Hello World
----
+1. Open `Settings` > `Third-party plugin`
+2. Make sure Safe mode is **off**
+3. Click `Browse community plugins`
+4. Search for this plugin
+5. Click `Install`
+6. Once installed, enable this plugin and close the community plugins window and the plugin is ready to use.
 
-## 本地图片（绝对路径）
-![test](/Users/zhangwenbo/Coding/hexo/public/img/2014-03-11.jpg)
-![](~/Coding/hexo/public/img/2014-03-30-2.jpg)
+***
 
-## 本地图片（相对路径）
-![](./2014-03-30.jpg)
-![](../images/000.jpg)
+1. 打开`设置`>`第三方插件`
+2. 确保安全模式为`关闭`
+3. 点击`浏览社区插件`
+4. 搜索此插件
+5. 点击`安装`
+6. 安装完成后，启用该插件并关闭安装窗口，插件即可使用
 
-## 在线图片
-![小猫](https://images.unsplash.com/photo-1534201569625-ed4662d8be97?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1ff48aebbb7e08c289f8f738b5592f47&auto=format&fit=crop&w=400&q=60)
+### From GitHub
 
-## CDN 图片
-![艺](http://7xqmgi.com1.z0.glb.clouddn.com/img/2014-03-11.jpg)
+1. Download the Latest Release from the Releases section of the GitHub Repository
+2. Put files to your vault's plugins folder: `<vault>/.obsidian/plugins/link-to-obsidian`  
+3. Reload Obsidian
+4. If prompted about Safe Mode, you can disable safe mode and enable the plugin.
+Otherwise, head to Settings, third-party plugins, make sure safe mode is off and
+enable the plugin from there.
 
-无论哪种方式都能完美显示！
-```
+> Note: The `.obsidian` folder may be hidden. On macOS, you should be able to press `Command+Shift+Dot` to show the folder in Finder.
 
-运行 `hexo g` 后，所有图片被 copy 或 download 到 `source/images/hello-world-2` 下，且 post 内容变为
+***
 
-```md
----
-title: Hello World
----
+1. 从GitHub仓库的Releases下载最新版本
+2. 把文件放在对应Vault的插件文件夹下：`<vault>/.obsidian/plugins/link-to-obsidian`
+3. 重新加载Obsidian
+4. 如果出现有关安全模式的提示，则可以禁用安全模式并启用插件。否则，请转到`设置`→`第三方插件`，确保关闭安全模式，然后从`第三方插件`启用插件
 
-## 本地图片（绝对路径）
-![test](../images/hello-world-2/2014-03-11.jpg)
-![](../images/hello-world-2/2014-03-30-2.jpg)
-
-## 本地图片（相对路径）
-![](../images/hello-world-2/2014-03-30.jpg)
-![](../images/hello-world-2/000.jpg)
-
-## 在线图片
-![小猫](../images/hello-world-2/ol-1534652801825.jpg)
-
-## CDN 图片
-![艺](../images/hello-world-2/ol-1534652801828.jpg)
-
-无论哪种方式都能完美显示！
-```
-
-生成的 html 文件为：
-```html
-<h2 id="本地图片（绝对路径）"><a href="#本地图片（绝对路径）" class="headerlink" title="本地图片（绝对路径）"></a>本地图片（绝对路径）</h2>
-<p><img src="/images/hello-world-2/2014-03-11-s.jpg" alt="test"><br><img src="/images/hello-world-2/2014-03-30-2-s.jpg" alt=""></p>
-<h2 id="本地图片（相对路径）"><a href="#本地图片（相对路径）" class="headerlink" title="本地图片（相对路径）"></a>本地图片（相对路径）</h2>
-<p><img src="/images/hello-world-2/2014-03-30-s.jpg" alt=""><br><img src="/images/hello-world-2/000-s.jpg" alt=""></p>
-<h2 id="在线图片"><a href="#在线图片" class="headerlink" title="在线图片"></a>在线图片</h2>
-<p><img src="/images/hello-world-2/ol-1534652801825-s.jpg" alt="小猫"></p>
-<h2 id="CDN-图片"><a href="#CDN-图片" class="headerlink" title="CDN 图片"></a>CDN 图片</h2>
-<p><img src="/images/hello-world-2/ol-1534652801828-s.jpg" alt="艺"></p>
-<p>无论哪种方式都能完美显示！</p>
-```
-
-如此，在本地还是线上地图片，都完美显示。
-
-另可自定义生成压缩版（后缀为 `imgname-s.jpg`）图片。也可配置 `cnd_prefix` 则生成 html 图片路径将为：
-```html
-<h2 id="CDN-图片"><a href="#CDN-图片" class="headerlink" title="CDN 图片"></a>CDN 图片</h2>
-<p><img src="http://yourcdn.com/images/hello-world-2/ol-1534652801828-s.jpg" alt="艺"></p>
-```
-
-## TODO
-[-] 发布到 hexo 插件
-[-] 在 windows 上测试
-
+> 注意，`.obsidian`文件夹为隐藏文件夹，在macOS的Finder下可以按`Command+Shift+.`以显示隐藏文件夹

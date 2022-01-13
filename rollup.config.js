@@ -2,8 +2,6 @@ import commonjs from "@rollup/plugin-commonjs"
 import json from "@rollup/plugin-json"
 import { nodeResolve } from "@rollup/plugin-node-resolve"
 import typescript from "@rollup/plugin-typescript"
-// import typescript from 'rollup-plugin-typescript';
-import copy from "rollup-plugin-copy"
 
 import { terser } from "rollup-plugin-terser"
 
@@ -20,10 +18,7 @@ let plugins = [
     typescript(),
     nodeResolve({ browser: true, preferBuiltins: true }),
     commonjs(),
-    json(),
-//     copy({
-//         targets: [{ src: "manifest.json", dest: "build" }]
-//     })
+    json()
 ]
 if (isProd) plugins.push(terser())
 

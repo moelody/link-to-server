@@ -6,5 +6,5 @@
 	"description": "This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.",
 	"author": "moelody",
 	"authorUrl": "https://www.moelody.com",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }

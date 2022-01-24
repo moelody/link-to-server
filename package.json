@@ -1,5 +1,5 @@
 {
-    "name": "link-to-obsidian",
+    "name": "link-info-server",
     "version": "1.0.1",
     "description": "This plugin will open a reverse proxy server at port 3333 to get wikiLink information Obsidian API.",
     "main": "index.js",
@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/moelody/link-to-obsidian.git"
+        "url": "git+ssh://git@github.com/moelody/link-info-server.git"
     },
     "keywords": [
         "hexo",
@@ -20,9 +20,9 @@
     "author": "moelody",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/moelody/link-to-obsidian/issues"
+        "url": "https://github.com/moelody/link-info-server/issues"
     },
-    "homepage": "https://github.com/moelody/link-to-obsidian#readme",
+    "homepage": "https://github.com/moelody/link-info-server#readme",
     "devDependencies": {
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-json": "^4.1.0",

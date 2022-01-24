@@ -82,7 +82,7 @@ The required API feature is only available for Obsidian v0.12.2+.
 ### From GitHub
 
 1. Download the Latest Release from the Releases section of the GitHub Repository
-2. Put files to your vault's plugins folder: `<vault>/.obsidian/plugins/link-to-obsidian`  
+2. Put files to your vault's plugins folder: `<vault>/.obsidian/plugins/link-info-server`  
 3. Reload Obsidian
 4. If prompted about Safe Mode, you can disable safe mode and enable the plugin.
 Otherwise, head to Settings, third-party plugins, make sure safe mode is off and
@@ -93,7 +93,7 @@ enable the plugin from there.
 ***
 
 1. 从GitHub仓库的Releases下载最新版本
-2. 把文件放在对应Vault的插件文件夹下：`<vault>/.obsidian/plugins/link-to-obsidian`
+2. 把文件放在对应Vault的插件文件夹下：`<vault>/.obsidian/plugins/link-info-server`
 3. 重新加载Obsidian
 4. 如果出现有关安全模式的提示，则可以禁用安全模式并启用插件。否则，请转到`设置`→`第三方插件`，确保关闭安全模式，然后从`第三方插件`启用插件
 

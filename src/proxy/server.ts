@@ -1,6 +1,7 @@
 import { default as express } from "express";
 import { NextFunction, Request, Response } from "express";
 import LinkOB from "../main";
+import { FileSystemAdapter } from "obsidian"
 
 type TFile = {
     basename: string,
@@ -30,20 +31,21 @@ const getServer = (port: number, plugin: LinkOB) => {
         const file = plugin.app.metadataCache.getFirstLinkpathDest(<string>fileLink, <string>sourcePath);
         if (file) {
 
-            const fileText = await plugin.app.vault.read(file);
+            const vault = plugin.app.vault;
+            const fileText = await vault.cachedRead(file);
     
             const data = {
-                basename: file?.basename,
-                extension: file?.extension,
-                name: file?.name, 
+                basename: file.basename,
+                extension: file.extension,
+                name: file.name, 
                 parent: {
-                    name: file?.parent.name,
-                    path: file?.parent.path
+                    name: file.parent.name,
+                    path: file.parent.path
                 },
-                path: file?.path,
+                path: file.path,
                 vault: {
                     adapter: {
-                        basePath: file?.vault.adapter.basePath
+                        basePath: (vault.adapter instanceof FileSystemAdapter) ? vault.adapter.getBasePath() : null
                     }
                 },
                 content: fileText

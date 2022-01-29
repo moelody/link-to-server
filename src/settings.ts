@@ -61,7 +61,7 @@ export class LinkOBSettingsTab extends PluginSettingTab {
         const coffeeLink = coffeeDiv.createEl("a", { href: "https://www.patreon.com/moelody" })
         const coffeeImg = coffeeLink.createEl("img", {
             attr: {
-                src: "https://cdn.jsdelivr.net/gh/moelody/cdn@imgbot/blog/wechatpay.png"
+                src: "https://cdn.jsdelivr.net/gh/moelody/cdn@master/blog/wechatpay.png"
             }
         })
         coffeeImg.height = 150

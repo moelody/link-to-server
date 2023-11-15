@@ -1,3 +1,13 @@
+/*
+ * @Author: moelody yfsmallmoon@gmail.com
+ * @Date: 2022-01-10 22:10:39
+ * @LastEditors: moelody yfsmallmoon@gmail.com
+ * @LastEditTime: 2023-11-15 22:01:16
+ * @FilePath: \link-info-server\src\proxy\server.ts
+ * @Description: 
+ * 
+ * Copyright (c) 2022 by moelody yfsmallmoon@gmail.com, All Rights Reserved. 
+ */
 import { default as express } from "express";
 import { NextFunction, Request, Response } from "express";
 import LinkOB from "../main";
@@ -28,7 +38,10 @@ const getServer = (port: number, plugin: LinkOB) => {
         // res.setHeader('Access-Control-Allow-Headers', '*');
         // res.setHeader('Access-Control-Allow-Method', '*');
         const { fileLink, sourcePath } = req.query;
+        console.log(`fileLink:${fileLink}`);
+        console.log(`sourcePath:${sourcePath}`);
         const file = plugin.app.metadataCache.getFirstLinkpathDest(<string>fileLink, <string>sourcePath);
+        console.log(`file:${file}`);
         if (file) {
 
             const vault = plugin.app.vault;
@@ -47,9 +60,9 @@ const getServer = (port: number, plugin: LinkOB) => {
                     adapter: {
                         basePath: (vault.adapter instanceof FileSystemAdapter) ? vault.adapter.getBasePath() : null
                     }
-                },
-                content: fileText
+                }
             }
+            console.log(`请求数据${JSON.stringify(data)}`);
             res.send(JSON.stringify(data));
         } else {
             res.send('failed to find');
